@@ -1,8 +1,7 @@
 module HelperMethods
 
-  attr_accessor :title
 
-  def titleize
+  def titleize(title)
     words = title.split(" ")
     words.each_with_index do |word, index|
       if (index == 0) || (word != "of" && word != "the" && word != "and" && word != "in" && word != "from")
@@ -10,8 +9,8 @@ module HelperMethods
     end
   end
 
-    words.join(" ")
-  end
+   words.join(" ")
+ end
 end
 
 class Title
@@ -19,15 +18,14 @@ class Title
 end
 
 class Heading
+  extend HelperMethods
 end
 
 book = Title.new
-book.title = "harry potter and the goblet of fire"
+puts "trying to call titleize on instance of Title"
+p book.titleize("harry potter and the goblet of fire")
 
-p book.titleize
 
 name = Heading.new
-name.extend HelperMethods
-name.title = "the lord of the rings"
-
-p name.titleize
+puts "trying to call titleize on class Heading"
+p Heading.titleize("harry potter and the goblet of fire")
